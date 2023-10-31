@@ -1,5 +1,5 @@
 {
-    "name": "coolsam/modules",
+    "name": "andresilva/filament-modules",
     "description": "Support for nwidart/laravel-modules in filamentphp",
     "keywords": [
         "coolsam",
