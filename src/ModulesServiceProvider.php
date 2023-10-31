@@ -7,6 +7,7 @@ use Coolsam\FilamentModules\Extensions\LaravelModulesServiceProvider;
 use Filament\Facades\Filament;
 use Illuminate\Support\Arr;
 use Illuminate\Support\HtmlString;
+use Illuminate\Support\Facades\Blade;
 use Nwidart\Modules\Facades\Module;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -50,24 +51,22 @@ class ModulesServiceProvider extends PackageServiceProvider
                     $panel
                         ->renderHook(
                             'panels::sidebar.nav.start',
-                            fn () => new HtmlString("<h2 class='font-black text-xl'>$title</h2>"
-                                . '<a href="' . url('/') . '" class="inline-flex gap-2 block rounded-lg font-bold bg-gray-500/10">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-                            </svg>
-                            Voltar
-                          </a>'),
+                            fn () => Blade::render(
+                                <<<'HTML'
+                                <x-filament::link href="/" size="xl" color="gray" icon="sui-wrap-back" class="self-start" tooltip="Voltar ao módulo principal">Voltar</x-filament::link>
+                                <h2 class='font-black text-xl'>{{ $title }}</h2>
+                                HTML,
+                                ['title' => $title]
+                            )
                         )
                         ->renderHook(
                             'panels::sidebar.nav.end',
-                            fn () => new HtmlString(
-                                '<a href="' . url('/') . '" class="inline-flex gap-2 block rounded-lg font-bold bg-gray-500/10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-                                        </svg>
-                                        Voltar
-                                      </a>'
-                            ),
+                            fn () => Blade::render(
+                                <<<'HTML'
+                                <x-filament::link href="/" size="xl" color="gray" icon="sui-wrap-back" class="self-start" tooltip="Voltar ao módulo principal">Voltar</x-filament::link>
+                                HTML,
+                                ['title' => $title]
+                            )
                         );
                 }
             }
