@@ -42,7 +42,7 @@ class ModulesServiceProvider extends PackageServiceProvider
 
                     $module = Module::find($moduleName);
 
-                    $configPath = $module->getPath() . '/Config/Config.php';
+                    $configPath = $module->getPath() . '/Config/config.php';
 
                     $config = require_once($configPath);
 
